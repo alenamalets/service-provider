@@ -1,4 +1,5 @@
 <script>
+    import Api from '../sevices/api';
 
     export default {
         data() {
@@ -13,8 +14,9 @@
                 console.log('a', a)
                 console.log('chosenSkills', this.chosenSkills)
             },
-            getRequests() {
-                console.log('het')
+            async getRequests() {
+                const data = await Api.post('skills');
+                console.log('api response', data)
             }
         }
     };
