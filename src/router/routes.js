@@ -1,8 +1,13 @@
 const routes = [
     {
         path: '/',
-        name: 'start',
+        name: 'profile',
         component: () => import('@/pages/profile-details.vue')
+    },
+    {
+        path: '/skills',
+        name: 'skills',
+        component: () => import('@/pages/skills.vue')
     },
     // Default route
     {
