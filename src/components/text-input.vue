@@ -70,9 +70,6 @@ validation-provider(
 </template>
 
 <style lang="scss">
-.input-container {
-    margin: 1em;
-}
 .error {
     color: lightcoral;
 }

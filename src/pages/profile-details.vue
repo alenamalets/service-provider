@@ -1,10 +1,12 @@
 <script>
+    import Datepicker from 'vuejs-datepicker';
     import TextInput from '../components/text-input'
     import { mapGetters, mapMutations } from 'vuex'
 
     export default {
         components: {
             TextInput,
+            Datepicker
         },
         data() {
             return {
@@ -14,7 +16,6 @@
                     email: '',
                     dateOfBirth: ''
                 },
-                imageUrl: ''
             };
         },
         async created() {
@@ -56,7 +57,9 @@
             class="details-form"
             @submit.prevent="handleSubmit(onSubmit)"
         )   
-            button(class="btn btn-info" @click="onPickFile") Upload profile picture
+            h3 Fill in your profile details
+            img.image(id="output")
+            button.btn(class="btn btn-info" @click="onPickFile") Upload profile picture
             input(
                 type="file"
                 ref="fileInput"
@@ -64,7 +67,6 @@
                 accept="image/*"
                 @change="onFilePicked"
             )
-            img(id="output" width="200")
             text-input(
                 v-model="user.firstName",
                 attribute="firstName",
@@ -86,7 +88,12 @@
                 placeholder="Enter email",
                 rules="required|email"
             )
-            button(
+            label(
+                class="input-label"
+                :for="attribute",
+            ) Date of birth
+            datepicker(v-model="user.dateOfBirth" input-class="input-text" placeholder="Select date")
+            button.btn(
                 type="submit",
                 :disabled="invalid || pristine",
             ) Next
@@ -94,6 +101,18 @@
 </template>
 
 <style lang="scss" scoped>
+.image {
+    height: 96px;
+    width: 96px;
+    background-color: lightgrey;
+    border-radius: 50%;
+}
+.btn {
+    padding: 6px;
+    background: #79c255;
+    border-color: #79c255;
+    color: #fff;
+}
 .container {
     margin: 2rem;
 }
@@ -104,5 +123,15 @@
     .details-form {
         width: 100%;
     }
+}
+.input-label {
+    font-size: 16px;
+    font-weight: 300;
+}
+.input-text {
+    border: 1px solid #e9ecef;
+    padding: 16px;
+    font-size: 12px;
+    font-weight: 300;
 }
 </style>
