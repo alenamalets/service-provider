@@ -4,7 +4,7 @@ export default {
 </script>
 
 <template lang="pug">
-p Test
+p NoName
 </template>
 
 <style lang="scss">

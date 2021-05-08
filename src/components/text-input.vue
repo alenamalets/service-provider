@@ -49,19 +49,42 @@ validation-provider(
     :name="attribute",
     :rules="rules",
     v-slot="{ errors }"
-)
-    label(
-        :for="attribute",
-    ) {{ label || attribute }}
+)   
+    .input-container
+        label(
+            class="input-label"
+            :for="attribute",
+        ) {{ label || attribute }}
+        .input-field
+            input(
+                class="input-text"
+                :type="type",
+                v-model="innerValue",
+                :id="attribute",
+                :placeholder="placeholder || label",
+            )
 
-    input(
-        :type="type",
-        v-model="innerValue",
-        :id="attribute",
-        :placeholder="placeholder || label",
-    )
-
-    small(
-        v-show="showErrors && errors"
-    ) {{ errors[0] }}
+        small.error(
+            v-show="showErrors && errors"
+        ) {{ errors[0] }}
 </template>
+
+<style lang="scss">
+.input-container {
+    margin: 1em;
+}
+.error {
+    color: lightcoral;
+}
+.input-label {
+    font-size: 16px;
+    font-weight: 300;
+}
+.input-text {
+    border: 1px solid #e9ecef;
+    padding: 16px;
+    font-size: 12px;
+    font-weight: 300;
+    width: 100%;
+}
+</style>

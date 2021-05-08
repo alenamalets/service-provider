@@ -10,8 +10,19 @@ export default {
 
 <template lang="pug">
 .container
-    logo
+    .form-content
+        .logo
+            logo
 </template>
 
 <style lang="scss" scoped>
+.form-content {
+    min-width: 375px;
+    background-color: red;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+}
 </style>

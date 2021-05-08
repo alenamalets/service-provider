@@ -5,11 +5,12 @@
     export default {
         data() {
             return {
-                data: []
+                allRequests: [],
+                acceptedRequests: []
             };
         },
         async created() {
-            this.data = await Api.post('skills', this.skills);
+            this.allRequests = await Api.post('skills', this.skills);
         },
         computed: {
             ...mapGetters({
@@ -17,19 +18,36 @@
             }),
         },
         methods: {
+            onAccepted(val) {
+                const checkStartDate = this.acceptedRequests.find(request => {
+                    const x = new Date(request.startDate);
+                    const y = new Date(val.startDate);
+                    console.log('x', x)
+                    console.log('y', y)
+                    request.startDate == val.startDate
+                })
+                console.log('checkStartDate', checkStartDate)
+                if (checkStartDate) {
+                    alert("You cannot choose requests with the same start date!");
+                } else {
+                    this.acceptedRequests.push(val)
+                }        
+                console.log('val', this.acceptedRequests)
+            },
         }
     };
 </script>
 
 <template lang="pug">
 .container
-    .requests(v-for="item in data")
-        h3 {{ item.name }}
-        .skills(v-for="skill in item.skills")
-            span {{skill}}
-        p {{ item.startDate }} - {{ item.endDate }}
-        button(@click) Accept
-        button(@click) Decline
+    .dv(v-if="allRequests.length >0")
+        .requests(v-for="request in allRequests")
+            h3 {{ request.name }}
+            .skills(v-for="skill in request.skills")
+                span {{skill}}
+            p {{ request.startDate }} - {{ request.endDate }}
+            button(@click="onAccepted(request)") Accept
+    .vd(v-else) No data found. Try to choose different skills
 
                                 
 </template>

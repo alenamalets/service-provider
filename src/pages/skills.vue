@@ -51,7 +51,7 @@
         ) Submit                           
 </template>
 
-<style>
+<style lang="scss">
 .highlight {
     color: red
 }
