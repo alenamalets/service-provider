@@ -1,20 +1,13 @@
 <script>
-    import Api from '../sevices/api';
-
     export default {
         data() {
             return {
-                skills: ['firstSkill', 'secondSkill', 'thirdSkill', '4', '5'],
+                skills: ['Javascript', 'Go', 'PHP', 'Python', 'Jest', 'CSS'],
                 chosenSkills: [],
                 value: 0
             };
         },
         methods: {
-            updateSkill() {
-                if (this.chosenSkills.length > 3) {
-                    console.log('STOP')
-                }
-            },
             toggleSkill(skill) {
                 if(this.chosenSkills.includes(skill)) {
                     this.chosenSkills = this.chosenSkills.filter(value => value !== skill)
@@ -24,8 +17,7 @@
                 console.log('this.chosenSkills', this.chosenSkills)
             },
             async getRequests() {
-                const data = await Api.post('skills');
-                console.log('api response', data)
+                this.$router.push({ name: 'requests' })
             }
         }
     };
@@ -50,10 +42,7 @@
     button(
         :disabled="chosenSkills.length < 3",
         @click="getRequests"
-        ) Submit
-            
-</div>
-                                
+        ) Submit                           
 </template>
 
 <style>

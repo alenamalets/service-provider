@@ -16,7 +16,6 @@
         },
         methods: {
             onSubmit() {
-                console.log('Hello')
                 this.$router.push({ name: 'skills' })
             },
         }
