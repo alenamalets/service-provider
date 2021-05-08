@@ -10,9 +10,18 @@
             };
         },
         methods: {
-            updateSkill(a) {
-                console.log('a', a)
-                console.log('chosenSkills', this.chosenSkills)
+            updateSkill() {
+                if (this.chosenSkills.length > 3) {
+                    console.log('STOP')
+                }
+            },
+            toggleSkill(skill) {
+                if(this.chosenSkills.includes(skill)) {
+                    this.chosenSkills = this.chosenSkills.filter(value => value !== skill)
+                } else {
+                    this.chosenSkills.push(skill)
+                }
+                console.log('this.chosenSkills', this.chosenSkills)
             },
             async getRequests() {
                 const data = await Api.post('skills');
@@ -24,23 +33,31 @@
 
 <template lang="pug">
 .container
-    p Choose 3 skills
+    p Choose at least 3 skills
     div(v-for="(skill, i) in skills")   
-        input(type="checkbox" v-model="chosenSkills" :id="skill" :value="skill" @change="updateSkill")
-        label {{ skill }}
-            .slider
-                span Range your skill
-                el-slider(
-                    v-model="value"
-                    :step="1"
-                    :max="10"
-                    show-stops
-                )
-    button(@click="getRequests") Submit
+        button(
+            :class="chosenSkills.includes(skill) ? 'highlight': 'nope'",
+            @click="toggleSkill(skill)"
+        ) {{ skill }}
+        .slider(v-show="chosenSkills.includes(skill)")
+            span Indicate your experience
+            el-slider(
+                v-model="value"
+                :step="1"
+                :max="10"
+                show-stops
+            )
+    button(
+        :disabled="chosenSkills.length < 3",
+        @click="getRequests"
+        ) Submit
             
 </div>
                                 
 </template>
 
-<style lang="scss" scoped>
+<style>
+.highlight {
+    color: red
+}
 </style>
