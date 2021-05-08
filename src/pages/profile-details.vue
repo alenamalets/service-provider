@@ -1,5 +1,6 @@
 <script>
     import TextInput from '../components/text-input'
+    import { mapGetters, mapMutations } from 'vuex'
 
     export default {
         components: {
@@ -14,8 +15,22 @@
                 },
             };
         },
+        async created() {
+            if (this.currentUser) {
+                this.user = this.currentUser
+            }
+        },
+        computed: {
+            ...mapGetters({
+                currentUser: 'user',
+            }),
+        },
         methods: {
+            ...mapMutations({
+                setUserProfile: 'SET_USER_PROFILE',
+            }),
             onSubmit() {
+                this.setUserProfile(this.user)
                 this.$router.push({ name: 'skills' })
             },
         }

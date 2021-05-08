@@ -1,4 +1,6 @@
 <script>
+    import { mapMutations } from 'vuex'
+
     export default {
         data() {
             return {
@@ -8,6 +10,9 @@
             };
         },
         methods: {
+            ...mapMutations({
+                setUserSkills: 'SET_USER_SKILLS',
+            }),
             toggleSkill(skill) {
                 if(this.chosenSkills.includes(skill)) {
                     this.chosenSkills = this.chosenSkills.filter(value => value !== skill)
@@ -17,6 +22,7 @@
                 console.log('this.chosenSkills', this.chosenSkills)
             },
             async getRequests() {
+                this.setUserSkills(this.chosenSkills)
                 this.$router.push({ name: 'requests' })
             }
         }

@@ -1,5 +1,6 @@
 <script>
     import Api from '../sevices/api';
+    import { mapGetters } from 'vuex'
 
     export default {
         data() {
@@ -9,7 +10,11 @@
         },
         async created() {
             this.data = await Api.post('skills');
-            console.log('api response', this.data)
+        },
+        computed: {
+            ...mapGetters({
+                skills: 'skills',
+            }),
         },
         methods: {
         }
