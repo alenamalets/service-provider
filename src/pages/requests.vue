@@ -9,7 +9,7 @@
             };
         },
         async created() {
-            this.data = await Api.post('skills');
+            this.data = await Api.post('skills', this.skills);
         },
         computed: {
             ...mapGetters({

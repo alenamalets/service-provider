@@ -5,10 +5,10 @@ const baseUrl = 'http://localhost:9000';
 const service = {
   async post(route, params) {
     try {
-      const response = await axios.post(`${baseUrl}/${route}`, {
+      const { data } = await axios.post(`${baseUrl}/${route}`, {
         params
       });
-      return response.data;
+      return data
     } catch (error) {
       return error;
     }
