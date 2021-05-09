@@ -60,7 +60,7 @@
                     this.chosenSkills.push(skill)
                 }
             },
-            async getRequests() {
+            async setSkills() {
                 this.setUserSkills(this.chosenSkills)
                 this.$router.push({ name: 'requests' })
             }
@@ -90,7 +90,7 @@
 
         button.btn-submit(
             :disabled="chosenSkills.length < 3",
-            @click="getRequests"
+            @click="setSkills"
             ) Submit                           
 </template>
 
