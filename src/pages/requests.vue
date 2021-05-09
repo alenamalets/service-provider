@@ -6,11 +6,13 @@
         data() {
             return {
                 allRequests: [],
-                acceptedRequests: []
+                acceptedRequests: [],
+                skillNames: []
             };
         },
         async created() {
-            this.allRequests = await Api.post('skills', this.skills);
+            this.skillNames = this.skills.map(skill => skill.name)
+            this.allRequests = await Api.post('skills', this.skillNames);
         },
         computed: {
             ...mapGetters({
@@ -39,12 +41,11 @@
 </script>
 
 <template lang="pug">
-.container
+.container-center
     .dv(v-if="allRequests.length >0")
-        .requests(v-for="request in allRequests")
+        .request(v-for="request in allRequests")
             h3 {{ request.name }}
-            .skills(v-for="skill in request.skills")
-                span {{skill}}
+            span.skills(v-for="skill in request.skills") {{skill}}
             p {{ request.startDate }} - {{ request.endDate }}
             button(@click="onAccepted(request)") Accept
     .vd(v-else) No data found. Try to choose different skills
@@ -52,8 +53,26 @@
                                 
 </template>
 
-<style>
-.highlight {
-    color: red
+<style lang="scss" scoped>
+.request {
+   background-color: rgb(255, 255, 255);
+   width: 60%;
+   padding: 0px 20px 20px 20px;
+   margin: 0px;
+   margin-top: 10px;
+   margin-bottom: 10px;
+   border: solid 1px rgb(228, 228, 228);
+   border-radius: 7px;
+   
+}
+.skills {
+    margin: 2px;
+    color: rgb(36, 105, 59);
+    font-size: 13px;
+    border-radius: 2px;
+    background-color:rgb(206, 209, 206);
+    color: white;
+    padding: 3px 6px;
+    
 }
 </style>

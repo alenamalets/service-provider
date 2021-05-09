@@ -84,4 +84,7 @@ validation-provider(
     font-weight: 300;
     width: 100%;
 }
+.input-container {
+    margin-bottom: 20px;
+}
 </style>

@@ -48,7 +48,7 @@
 </script>
 
 <template lang="pug">
-.container
+.container-center
     validation-observer.form-wrapper(
         tag="div",
         v-slot="{ invalid, pristine, handleSubmit }",
@@ -58,8 +58,9 @@
             @submit.prevent="handleSubmit(onSubmit)"
         )   
             h3 Fill in your profile details
-            img.image(id="output")
-            button.btn(class="btn btn-info" @click="onPickFile") Upload profile picture
+            div.image-container
+                img.avatar-image(id="output")
+                button.btn-upload-pic(class="btn btn-info" @click="onPickFile") upload
             input(
                 type="file"
                 ref="fileInput"
@@ -92,8 +93,12 @@
                 class="input-label"
                 :for="attribute",
             ) Date of birth
-            datepicker(v-model="user.dateOfBirth" input-class="input-text" placeholder="Select date")
-            button.btn(
+            datepicker(
+                v-model="user.dateOfBirth",
+                input-class="input-text",
+                placeholder="Select date"
+            )
+            button.btn-submit(
                 type="submit",
                 :disabled="invalid || pristine",
             ) Next
@@ -101,17 +106,29 @@
 </template>
 
 <style lang="scss" scoped>
-.image {
+.image-container {
+    position: relative;
+    height: 96px;
+    width: 96px;
+    margin-bottom: 20px;
+}
+.avatar-image {
     height: 96px;
     width: 96px;
     background-color: lightgrey;
     border-radius: 50%;
+    position: absolute;
 }
 .btn {
     padding: 6px;
     background: #79c255;
     border-color: #79c255;
     color: #fff;
+    position: absolute;
+}
+.btn:disabled{
+    background: #79c2558f;
+    border-color: #79c2558f;
 }
 .container {
     margin: 2rem;
@@ -134,4 +151,20 @@
     font-size: 12px;
     font-weight: 300;
 }
+.btn-upload-pic {
+    padding: 6px;
+    background: none;
+    
+    color: #fff;
+    cursor: pointer;
+    border:none;
+    margin-top: 35px;
+    margin-left: 22px;
+    
+}
+
+.btn-upload-pic:hover {
+    text-decoration: underline;
+    }
+
 </style>
