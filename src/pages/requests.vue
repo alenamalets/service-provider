@@ -22,7 +22,7 @@
         },
         methods: {
             formattedDate(val) {
-                return moment(val).format('DD-MM-YYYY');
+                return moment(val).format('DD.MM.YYYY');
             },
             onAccepted(val) {
                 if (this.acceptedRequests.length > 0) {
@@ -49,15 +49,17 @@
 <template lang="pug">
 .container-center
     .dv(v-if="allRequests.length >0")
-        .request(v-for="request in allRequests")
+        .request(
+            :class="acceptedRequests.includes(request) ? 'highlighted': 'nope'",
+            v-for="request in allRequests"
+            )
             h3 {{ request.name }}
             span.skills(v-for="skill in request.skills") {{skill}}
-            p {{ formattedDate(request.startDate) }} - {{ formattedDate(request.endDate) }}
+            p.dates-scope {{ formattedDate(request.startDate) }} - {{ formattedDate(request.endDate) }}
             div(v-if="acceptedRequests.includes(request)")
-                p Accepted
-                button(@click="onDecline(request)") Decline
+                button.decline-button(@click="onDecline(request)") Decline
             div(v-else)
-                button(@click="onAccepted(request )") Accept
+                button.accept-button(@click="onAccepted(request )") Accept
     .vd(v-else) No data found. Try to choose different skills
 
                                 
@@ -75,6 +77,9 @@
    border-radius: 7px;
    
 }
+.highlighted {
+     border: solid 2px rgb(80, 146, 84);
+}
 .skills {
     margin: 2px;
     color: rgb(36, 105, 59);
@@ -85,4 +90,33 @@
     padding: 3px 6px;
     
 }
+.dates-scope {
+    font-size: 12px;
+    color: #363f328f;
+}
+.accept-button {
+    padding: 6px;
+    background: #79c255;
+    border: none;
+    color: #fff;
+    border-radius: 2px;
+    width: 60px;
+    cursor: pointer;
+    &:hover {
+        background: #67a549;
+    }
+}
+.decline-button {
+    padding: 6px;
+    background: #c27d55;
+    border: none;
+    color: #fff;
+    border-radius: 2px;
+    width: 60px;
+    cursor: pointer;
+    &:hover {
+        background: #ac6740;
+    }
+}
+
 </style>

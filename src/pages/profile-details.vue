@@ -126,11 +126,13 @@
     border-color: #79c255;
     color: #fff;
     position: absolute;
+
+    &:disabled{
+        background: #79c2558f;
+        border-color: #79c2558f;
+    }
 }
-.btn:disabled{
-    background: #79c2558f;
-    border-color: #79c2558f;
-}
+
 .container {
     margin: 2rem;
 }

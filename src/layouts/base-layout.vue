@@ -43,8 +43,9 @@ body {
     border:none;
     margin-top: 30px;
     border-radius: 3px;
-}
-.btn-submit:disabled{
-    background-color: #d3d3d4;
+
+    &:disabled{
+        background-color: #d3d3d4;
+    }
 }
 </style>
