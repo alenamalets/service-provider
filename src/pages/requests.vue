@@ -1,4 +1,5 @@
 <script>
+    import moment from 'moment';
     import Api from '../sevices/api';
     import { mapGetters } from 'vuex'
 
@@ -20,22 +21,27 @@
             }),
         },
         methods: {
+            formattedDate(val) {
+                return moment(val).format('DD-MM-YYYY');
+            },
             onAccepted(val) {
-                const checkStartDate = this.acceptedRequests.find(request => {
-                    const x = new Date(request.startDate);
-                    const y = new Date(val.startDate);
-                    console.log('x', x)
-                    console.log('y', y)
-                    request.startDate == val.startDate
-                })
-                console.log('checkStartDate', checkStartDate)
-                if (checkStartDate) {
-                    alert("You cannot choose requests with the same start date!");
+                if (this.acceptedRequests.length > 0) {
+                    const checkStartDate = this.acceptedRequests.find(request => {
+                        return moment(request.startDate).isSame(val.startDate, 'day');
+                    })
+                    if(!checkStartDate) {
+                        this.acceptedRequests.push(val)
+                    } else {
+                        alert('You cannot choose requests with the same start date')
+                    }
+                    console.log('this.acceptedRequests', this.acceptedRequests)
                 } else {
                     this.acceptedRequests.push(val)
                 }        
-                console.log('val', this.acceptedRequests)
             },
+            onDecline(val) {
+                this.acceptedRequests = this.acceptedRequests.filter(request => request !== val)
+            }
         }
     };
 </script>
@@ -46,8 +52,12 @@
         .request(v-for="request in allRequests")
             h3 {{ request.name }}
             span.skills(v-for="skill in request.skills") {{skill}}
-            p {{ request.startDate }} - {{ request.endDate }}
-            button(@click="onAccepted(request)") Accept
+            p {{ formattedDate(request.startDate) }} - {{ formattedDate(request.endDate) }}
+            div(v-if="acceptedRequests.includes(request)")
+                p Accepted
+                button(@click="onDecline(request)") Decline
+            div(v-else)
+                button(@click="onAccepted(request )") Accept
     .vd(v-else) No data found. Try to choose different skills
 
                                 

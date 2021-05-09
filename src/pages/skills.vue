@@ -22,10 +22,6 @@
                         rate: 0
                     },
                     {
-                        name: 'go',
-                        rate: 0
-                    },
-                    {
                         name: 'java',
                         rate: 0
                     },

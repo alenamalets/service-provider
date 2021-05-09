@@ -91,9 +91,10 @@
             )
             label(
                 class="input-label"
-                :for="attribute",
+                for="birth",
             ) Date of birth
             datepicker(
+                id="birth"
                 v-model="user.dateOfBirth",
                 input-class="input-text",
                 placeholder="Select date"
