@@ -3,10 +3,10 @@ import axios from 'axios';
 const baseUrl = 'http://localhost:9000';
 
 const service = {
-  async post(route, params) {
+  async post(route, skills) {
     try {
       const { data } = await axios.post(`${baseUrl}/${route}`, {
-        params
+        skills
       });
       return data
     } catch (error) {

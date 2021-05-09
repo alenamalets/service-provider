@@ -59,7 +59,6 @@
                 } else {
                     this.chosenSkills.push(skill)
                 }
-                console.log('this.chosenSkills', this.chosenSkills)
             },
             async getRequests() {
                 this.setUserSkills(this.chosenSkills)

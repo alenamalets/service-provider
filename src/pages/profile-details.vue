@@ -19,9 +19,6 @@
             };
         },
         async created() {
-            if (this.currentUser) {
-                this.user = this.currentUser
-            }
         },
         computed: {
             ...mapGetters({
@@ -163,11 +160,11 @@
     border:none;
     margin-top: 35px;
     margin-left: 22px;
+
+    &:hover {
+        text-decoration: underline;
+    }
     
 }
-
-.btn-upload-pic:hover {
-    text-decoration: underline;
-    }
 
 </style>

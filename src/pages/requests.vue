@@ -13,7 +13,7 @@
         },
         async created() {
             this.skillNames = this.skills.map(skill => skill.name)
-            this.allRequests = await Api.post('skills', this.skillNames);
+            this.allRequests = await Api.post('generate-requests', this.skillNames)
         },
         computed: {
             ...mapGetters({
@@ -34,7 +34,6 @@
                     } else {
                         alert('You cannot choose requests with the same start date')
                     }
-                    console.log('this.acceptedRequests', this.acceptedRequests)
                 } else {
                     this.acceptedRequests.push(val)
                 }        
@@ -48,7 +47,7 @@
 
 <template lang="pug">
 .container-center
-    .dv(v-if="allRequests.length >0")
+    .requests-container(v-if="allRequests.length >0")
         .request(
             :class="acceptedRequests.includes(request) ? 'highlighted': 'nope'",
             v-for="request in allRequests"
@@ -60,7 +59,7 @@
                 button.decline-button(@click="onDecline(request)") Decline
             div(v-else)
                 button.accept-button(@click="onAccepted(request )") Accept
-    .vd(v-else) No data found. Try to choose different skills
+    .requests-container(v-else) No data found. Try to choose different skills
 
                                 
 </template>

@@ -1,24 +1,12 @@
-# service-provider
+# Service provider API
 
-## Project setup
+### Install dependencies
 ```
-yarn install
+yarn
 ```
 
-### Compiles and hot-reloads for development
+### Run locally
+
 ```
 yarn serve
 ```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
